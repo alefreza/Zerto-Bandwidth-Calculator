@@ -34,12 +34,12 @@ function updateChart(bandwidth) {
     myChart = new Chart(ctx, {
         type: 'pie',  // Change to pie chart
         data: {
-            labels: ['Estimated WAN Bandwidth', 'Remaining Capacity'],
+            labels: ['Estimated WAN Bandwidth'],
             datasets: [{
                 label: 'Bandwidth Usage',
-                data: [bandwidth, 100 - bandwidth],  // Bandwidth and remaining capacity
-                backgroundColor: ['#4CAF50', '#e0e0e0'],  // Green for bandwidth, gray for remaining
-                borderColor: ['#4CAF50', '#e0e0e0'],
+                data: [bandwidth],  // Only display the bandwidth value
+                backgroundColor: ['#4CAF50'],  // Green for bandwidth
+                borderColor: ['#4CAF50'],
                 borderWidth: 1
             }]
         },
