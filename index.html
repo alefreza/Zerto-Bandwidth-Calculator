@@ -168,22 +168,19 @@
             }
 
             myChart = new Chart(ctx, {
-                type: 'doughnut',
+                type: 'pie',  // Using a pie chart instead of a doughnut
                 data: {
                     labels: ['Estimated WAN Bandwidth'],
                     datasets: [{
                         label: 'Bandwidth Usage',
-                        data: [bandwidth],
-                        backgroundColor: ['#4CAF50'],
-                        borderColor: ['#4CAF50'],
+                        data: [bandwidth, 100 - bandwidth],  // Second value represents remaining space (not used)
+                        backgroundColor: ['#4CAF50', '#e0e0e0'],  // Green for bandwidth, gray for remaining
+                        borderColor: ['#4CAF50', '#e0e0e0'],
                         borderWidth: 1
                     }]
                 },
                 options: {
                     responsive: true,
-                    circumference: Math.PI,  // Makes it a doughnut shape
-                    rotation: -Math.PI, // Starts the chart from the top
-                    cutoutPercentage: 70, // Adjusts the size of the hole in the doughnut
                     plugins: {
                         tooltip: {
                             callbacks: {
