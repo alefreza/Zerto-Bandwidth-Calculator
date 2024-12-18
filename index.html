@@ -88,7 +88,7 @@
         }
 
         .chart-container {
-            width: 100%;
+            width: 80%;
             height: 400px;
             margin-top: 30px;
             display: flex;
@@ -106,8 +106,8 @@
         }
 
         canvas {
-            width: 80% !important;
-            height: 80% !important;
+            width: 100% !important;
+            height: 100% !important;
         }
     </style>
 </head>
@@ -185,7 +185,7 @@
             myChart = new Chart(ctx, {
                 type: 'doughnut',  // Using a doughnut chart
                 data: {
-                    labels: ['Estimated WAN Bandwidth'],
+                    labels: ['Estimated WAN Bandwidth', 'Remaining Capacity'],
                     datasets: [{
                         label: 'Bandwidth Usage',
                         data: [bandwidth, 100 - bandwidth],  // Second value represents remaining space (not used)
