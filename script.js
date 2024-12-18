@@ -45,6 +45,7 @@ function updateChart(bandwidth) {
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false, // Allow chart to resize without maintaining aspect ratio
             plugins: {
                 tooltip: {
                     callbacks: {
@@ -60,7 +61,8 @@ function updateChart(bandwidth) {
                     display: true,
                     text: 'Estimated WAN Bandwidth Usage'
                 }
-            }
+            },
+            aspectRatio: 1 // Ensure the chart maintains a square shape, even when resized
         }
     });
 }
