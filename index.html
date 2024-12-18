@@ -106,8 +106,8 @@
         }
 
         canvas {
-            width: 100% !important;
-            height: 100% !important;
+            width: 80% !important;
+            height: 80% !important;
         }
     </style>
 </head>
@@ -196,9 +196,9 @@
                 },
                 options: {
                     responsive: true,
-                    circumference: Math.PI,  // Makes it a doughnut shape
-                    rotation: -Math.PI, // Starts the chart from the top
                     cutoutPercentage: 70, // Adjusts the size of the hole in the doughnut
+                    rotation: Math.PI, // Makes the chart start from the top
+                    circumference: Math.PI, // Half-circle (doughnut)
                     plugins: {
                         tooltip: {
                             callbacks: {
