@@ -34,10 +34,10 @@ function updateChart(bandwidth) {
     myChart = new Chart(ctx, {
         type: 'pie',  // Change to pie chart
         data: {
-            labels: ['Estimated WAN Bandwidth'],
+            labels: ['Estimated WAN Bandwidth'],  // Only one label
             datasets: [{
                 label: 'Bandwidth Usage',
-                data: [bandwidth],  // Only display the bandwidth value
+                data: [bandwidth],  // Only the WAN bandwidth value
                 backgroundColor: ['#4CAF50'],  // Green for bandwidth
                 borderColor: ['#4CAF50'],
                 borderWidth: 1
@@ -45,7 +45,7 @@ function updateChart(bandwidth) {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false, // Allow chart to resize without maintaining aspect ratio
+            maintainAspectRatio: false,  // Allow chart to resize without maintaining aspect ratio
             plugins: {
                 tooltip: {
                     callbacks: {
@@ -62,7 +62,7 @@ function updateChart(bandwidth) {
                     text: 'Estimated WAN Bandwidth Usage'
                 }
             },
-            aspectRatio: 1 // Ensure the chart maintains a square shape, even when resized
+            aspectRatio: 1  // Ensure the chart remains square even when resizing
         }
     });
 }
