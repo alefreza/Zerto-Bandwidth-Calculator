@@ -80,6 +80,12 @@
             color: #4CAF50;
         }
 
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+        }
+
         footer {
             background-color: #333;
             color: white;
@@ -101,7 +107,7 @@
         <form id="calculatorForm">
             <div class="input-group">
                 <label for="kbSec">KB/sec for VM:</label>
-                <input type="number" id="kbSec" placeholder="Enter KB/sec" required>
+                <input type="number" id="kbSec" placeholder="Enter KB/sec" required value="500">
             </div>
 
             <div class="input-group">
@@ -116,13 +122,21 @@
         </form>
 
         <div id="result" class="result"></div>
+
+        <div class="chart-container">
+            <canvas id="myChart"></canvas>
+        </div>
     </div>
 
     <footer>
         <p>&copy; 2024 Zerto Bandwidth Calculator | All rights reserved</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script>
+        let myChart;
+
         function calculateBandwidth() {
             const kbSec = parseFloat(document.getElementById("kbSec").value);
             const compressionFactor = parseInt(document.getElementById("compression").value);
@@ -137,6 +151,57 @@
 
             // Display result
             document.getElementById("result").innerHTML = `Estimated WAN Bandwidth: ${mbSec.toFixed(2)} Mb/sec`;
+
+            // Update chart
+            updateChart(mbSec);
+        }
+
+        function updateChart(bandwidth) {
+            const ctx = document.getElementById('myChart').getContext('2d');
+
+            if (myChart) {
+                myChart.destroy();  // Destroy the previous chart to avoid overlapping
+            }
+
+            myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['WAN Bandwidth', 'Remaining Capacity'],
+                    datasets: [{
+                        label: 'Bandwidth Usage',
+                        data: [bandwidth, 100 - bandwidth],
+                        backgroundColor: ['#4CAF50', '#ddd'],
+                        borderColor: ['#4CAF50', '#ddd'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `${context.label}: ${context.raw.toFixed(2)} Mb/sec`;
+                                }
+                            }
+                        },
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Estimated WAN Bandwidth Usage'
+                        }
+                    },
+                    circumference: Math.PI,  // Makes it a doughnut shape
+                    rotation: -Math.PI, // Starts the chart from the top
+                }
+            });
+        }
+
+        // Initialize with default bandwidth 5 Mb/sec
+        window.onload = function () {
+            calculateBandwidth();
         }
     </script>
 
