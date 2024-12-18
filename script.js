@@ -1,9 +1,11 @@
 let myChart;
 
 function calculateBandwidth() {
+    // Get input values
     const kbSec = parseFloat(document.getElementById("kbSec").value);
     const compressionFactor = parseInt(document.getElementById("compression").value);
 
+    // Validate input
     if (isNaN(kbSec) || kbSec <= 0) {
         alert("Please enter a valid KB/sec value.");
         return;
@@ -30,7 +32,7 @@ function updateChart(bandwidth) {
     }
 
     myChart = new Chart(ctx, {
-        type: 'doughnut',  // Doughnut chart type
+        type: 'pie',  // Change to pie chart
         data: {
             labels: ['Estimated WAN Bandwidth', 'Remaining Capacity'],
             datasets: [{
@@ -43,9 +45,6 @@ function updateChart(bandwidth) {
         },
         options: {
             responsive: true,
-            cutoutPercentage: 70, // Hole size in the center of doughnut
-            rotation: Math.PI,  // Makes the chart start from the top
-            circumference: Math.PI,  // Half-circle (doughnut)
             plugins: {
                 tooltip: {
                     callbacks: {
