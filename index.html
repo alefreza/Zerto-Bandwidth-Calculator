@@ -84,6 +84,7 @@
             position: relative;
             width: 100%;
             height: 300px;
+            margin-top: 30px;
         }
 
         footer {
@@ -180,6 +181,9 @@
                 },
                 options: {
                     responsive: true,
+                    circumference: Math.PI,  // Makes it a doughnut shape
+                    rotation: -Math.PI, // Starts the chart from the top
+                    cutoutPercentage: 70, // Adjusts the size of the hole in the doughnut
                     plugins: {
                         tooltip: {
                             callbacks: {
@@ -195,9 +199,7 @@
                             display: true,
                             text: 'Estimated WAN Bandwidth Usage'
                         }
-                    },
-                    circumference: Math.PI,  // Makes it a doughnut shape
-                    rotation: -Math.PI, // Starts the chart from the top
+                    }
                 }
             });
         }
