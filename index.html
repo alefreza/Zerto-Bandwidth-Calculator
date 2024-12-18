@@ -1,117 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Zerto Bandwidth Calculator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7fc;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-        }
-
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 1rem 0;
-            text-align: center;
-            width: 100%;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        h2 {
-            margin-bottom: 20px;
-        }
-
-        .input-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        .input-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .input-group input,
-        .input-group select {
-            width: 100%;
-            padding: 8px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        .btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .btn:hover {
-            background-color: #45a049;
-        }
-
-        .result {
-            margin-top: 20px;
-            font-size: 20px;
-            font-weight: bold;
-            color: #4CAF50;
-        }
-
-        .chart-container {
-            width: 80%;
-            height: 400px;
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            margin-top: 40px;
-            width: 100%;
-        }
-
-        canvas {
-            width: 100% !important;
-            height: 100% !important;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
     <header>
@@ -149,82 +44,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script>
-        let myChart;
-
-        function calculateBandwidth() {
-            const kbSec = parseFloat(document.getElementById("kbSec").value);
-            const compressionFactor = parseInt(document.getElementById("compression").value);
-
-            if (isNaN(kbSec) || kbSec <= 0) {
-                alert("Please enter a valid KB/sec value.");
-                return;
-            }
-
-            // Formula: WAN Mb/sec = (KB/sec * 8) / 1024 / compressionFactor
-            let mbSec = (kbSec * 8) / 1024 / compressionFactor;
-
-            // Add 5 Mb/sec to the result
-            mbSec += 5;
-
-            // Display result
-            document.getElementById("result").innerHTML = `Estimated WAN Bandwidth: ${mbSec.toFixed(2)} Mb/sec`;
-
-            // Update chart with the calculated value
-            updateChart(mbSec);
-        }
-
-        function updateChart(bandwidth) {
-            const ctx = document.getElementById('myChart').getContext('2d');
-
-            if (myChart) {
-                myChart.destroy();  // Destroy the previous chart to avoid overlapping
-            }
-
-            myChart = new Chart(ctx, {
-                type: 'doughnut',  // Using a doughnut chart
-                data: {
-                    labels: ['Estimated WAN Bandwidth', 'Remaining Capacity'],
-                    datasets: [{
-                        label: 'Bandwidth Usage',
-                        data: [bandwidth, 100 - bandwidth],  // Second value represents remaining space (not used)
-                        backgroundColor: ['#4CAF50', '#e0e0e0'],  // Green for bandwidth, gray for remaining
-                        borderColor: ['#4CAF50', '#e0e0e0'],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    cutoutPercentage: 70, // Adjusts the size of the hole in the doughnut
-                    rotation: Math.PI, // Makes the chart start from the top
-                    circumference: Math.PI, // Half-circle (doughnut)
-                    plugins: {
-                        tooltip: {
-                            callbacks: {
-                                label: function (context) {
-                                    return `${context.label}: ${context.raw.toFixed(2)} Mb/sec`;
-                                }
-                            }
-                        },
-                        legend: {
-                            position: 'top',
-                        },
-                        title: {
-                            display: true,
-                            text: 'Estimated WAN Bandwidth Usage'
-                        }
-                    }
-                }
-            });
-        }
-
-        // Initialize with default bandwidth 5 Mb/sec
-        window.onload = function () {
-            calculateBandwidth();
-        }
-    </script>
+    <script src="script.js"></script>
 
 </body>
-
 </html>
