@@ -146,13 +146,16 @@
                 return;
             }
 
-            // Formula: WAN Mb/sec = KB/sec * (8 / 1024 / (1 or 2 if compressible data))
-            const mbSec = (kbSec * 8) / 1024 / compressionFactor;
+            // Formula: WAN Mb/sec = (KB/sec * 8) / 1024 / compressionFactor
+            let mbSec = (kbSec * 8) / 1024 / compressionFactor;
+
+            // Add 5 Mb/sec to the result
+            mbSec += 5;
 
             // Display result
             document.getElementById("result").innerHTML = `Estimated WAN Bandwidth: ${mbSec.toFixed(2)} Mb/sec`;
 
-            // Update chart
+            // Update chart with the calculated value
             updateChart(mbSec);
         }
 
@@ -166,12 +169,12 @@
             myChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['WAN Bandwidth', 'Remaining Capacity'],
+                    labels: ['Estimated WAN Bandwidth'],
                     datasets: [{
                         label: 'Bandwidth Usage',
-                        data: [bandwidth, 100 - bandwidth],
-                        backgroundColor: ['#4CAF50', '#ddd'],
-                        borderColor: ['#4CAF50', '#ddd'],
+                        data: [bandwidth],
+                        backgroundColor: ['#4CAF50'],
+                        borderColor: ['#4CAF50'],
                         borderWidth: 1
                     }]
                 },
