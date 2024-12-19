@@ -1,7 +1,14 @@
+Overview
+Use the average write rate for the virtual machines in a VPG in the Zerto WAN Calculator to estimate the minimum bandwidth required.
+
+For each VM you also must decide whether compression will be enabled for the VM, based on the data characteristics.
+
+Note: The minimum dedicated bandwidth must always be at least 5 Mb/sec.
+
 How to Use
 
-To estimate the required bandwidth for your vSphere replication setup, follow the procedure below, either using the Zerto WAN Sizing Estimator or calculating manually.
-Estimating Bandwidth Using the Zerto WAN Sizing Estimator
+To estimate the required bandwidth for your vSphere replication setup, follow the procedure below, either using the Zerto WAN Sizing Calculator or calculating manually.
+Estimating Bandwidth Using the Zerto WAN Sizing Calculator
 
 "https://alefreza.github.io/Zerto-Bandwidth-Calculator/"  
 
@@ -16,9 +23,9 @@ Estimating Bandwidth Using the Zerto WAN Sizing Estimator
 
     Estimate the Total Bandwidth:
         The Zerto WAN Sizing Estimator will automatically calculate the total required bandwidth for your deployment, with a minimum value of 5 Mb/sec.
-        The estimated bandwidth is displayed at the top of each page in the Zerto WAN Sizing Estimator.
+      
 
-Estimating Bandwidth Without the Zerto WAN Sizing Estimator
+Estimating Bandwidth Without the Zerto WAN Sizing Calculator
 
 If you prefer to manually calculate the required WAN bandwidth, follow these steps:
 
@@ -30,13 +37,7 @@ If you prefer to manually calculate the required WAN bandwidth, follow these ste
     Sum the Results for All VMs:
         After calculating the bandwidth for each VM, sum all the results to estimate the total required WAN bandwidth.
 
-    Formula:
-    WAN Mb/sec=∑(KB/sec×81024×1(1 or 2 if compressible data))
-    WAN Mb/sec=∑(1024KB/sec×8​×(1 or 2 if compressible data)1​)
 
-    The final result will provide an estimate of the required WAN bandwidth in Mb/sec.
-
-    Note: The minimum dedicated bandwidth must always be at least 5 Mb/sec.
 
 Contributions
 
