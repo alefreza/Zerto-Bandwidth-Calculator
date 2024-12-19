@@ -3,8 +3,7 @@ How to Use
 To estimate the required bandwidth for your vSphere replication setup, follow the procedure below, either using the Zerto WAN Sizing Estimator or calculating manually.
 Estimating Bandwidth Using the Zerto WAN Sizing Estimator
 
-    Open the Zerto WAN Sizing Estimator: Launch the Zerto WAN Sizing Estimator tool to begin the calculation process.
-
+    Open "https://alefreza.github.io/Zerto-Bandwidth-Calculator/"  
     Enter the Information for Each Virtual Machine (VM):
         VM Name: Enter the name of the virtual machine in the designated field.
         Write KB/s Data: Input the write KB/s data based on statistics gathered for the VM. Be sure to use a period as the decimal separator.
