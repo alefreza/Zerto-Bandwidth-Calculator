@@ -1,4 +1,6 @@
 Overview
+
+
 Use the average write rate for the virtual machines in a VPG in the Zerto WAN Calculator to estimate the minimum bandwidth required.
 
 For each VM you also must decide whether compression will be enabled for the VM, based on the data characteristics.
